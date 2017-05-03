@@ -1,0 +1,12 @@
+BOT LANG
+
+Goals:
+Extensible and maintainable grammar for constructing chatbot replies
+NLP for chatbot interaction
+
+
+
+To-Do:
+1. tokenization of words/ variables for use in transforms
+2. sentence construction 
+3. processing input text? <- MAYBE DO THIS ONE FIRST?
