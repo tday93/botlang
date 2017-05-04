@@ -27,21 +27,42 @@ class Node(object):
                     new_pattern.append(item)
             new_string = "".join(new_pattern)
             return new_string
-
+# NOT WORKING BUT KEEPING HERE FOR REFERENCE FOR NOW
     def test(self, stringIn):
-        # WORK IN PROGRESS
+        print(self.name)
+        print(self.children)
+        print(len(self.children))
         if len(self.children) == 0:
             if stringIn in self.pattern:
                 return True
             else:
                 return False
         else:
+            # WORK IN PROGRESS
             for pattern in self.pattern:
-                if pattern in stringIn:
-                    split_string = stringIn.split(pattern)
-                    
+                print(pattern)
+                child_list = [self.get_base_name(item) 
+                              for item in pattern 
+                              if self.sub_pattern_check([item])]
+                print(child_list)
+                split_string = self.pattern_split(stringIn, pattern)
+                print(split_string)
+                print(child_list)
+                zipped = zip(child_list, split_string)
+                bools = []
+                for x,y in zipped:
+                    bools.append(self.children[x].test(y))
+                print(bools)
+                return all(bools)
+            return False
     
-
+    def pattern_split(self, stringIn, patternIn):
+        pattern = [item for item in patternIn if item != ""]
+        wrapped_pat = [re.escape(pat) for pat in pattern]
+        re_pat = re.compile("|".join(wrapped_pat))
+        list_out = re_pat.split(stringIn)
+        return_list = [item for item in list_out if item != ""]
+        return return_list
 
     def birth_children(self):
         for item in self.pattern:
@@ -114,3 +135,6 @@ if __name__ == "__main__":
         print(v.pattern)
     print(test_node.generate())
     print(test_node2.generate())
+    print(test_node2.pattern)
+    print(test_node2.children)
+    print(test_node2.test("Mr. Bobcat Goldthwait esq."))
