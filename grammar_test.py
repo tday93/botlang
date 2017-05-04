@@ -28,6 +28,21 @@ class Node(object):
             new_string = "".join(new_pattern)
             return new_string
 
+    def test(self, stringIn):
+        # WORK IN PROGRESS
+        if len(self.children) == 0:
+            if stringIn in self.pattern:
+                return True
+            else:
+                return False
+        else:
+            for pattern in self.pattern:
+                if pattern in stringIn:
+                    split_string = stringIn.split(pattern)
+                    
+    
+
+
     def birth_children(self):
         for item in self.pattern:
             if self.sub_pattern_check(item):
